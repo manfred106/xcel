@@ -5,6 +5,8 @@ allprojects {
 
 subprojects {
     apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
+    apply plugin: 'signing'
 
     repositories {
         mavenCentral()
@@ -12,8 +14,10 @@ subprojects {
 
     java {
         toolchain {
-            languageVersion = JavaLanguageVersion.of(17)
+            languageVersion = JavaLanguageVersion.of(11)
         }
+        withJavadocJar()
+        withSourcesJar()
     }
 
     testing {
@@ -21,6 +25,59 @@ subprojects {
             test {
                 useJUnitJupiter()
             }
+        }
+    }
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+                pom {
+                    name = project.name
+                    description = project.description
+                    url = 'https://github.com/manfred106/xcel'
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'manfred106'
+                            name = 'Manfred Ng'
+                            email = 'lumion@hotmail.com'
+                        }
+                    }
+                    scm {
+                        url = 'https://github.com/manfred106/xcel'
+                        connection = 'scm:git:https://github.com/manfred106/xcel.git'
+                        developerConnection = 'scm:git:https://github.com/manfred106/xcel.git'
+                    }
+                }
+            }
+        }
+        repositories {
+            mavenLocal()
+            maven {
+                name = 'sonatype'
+                url = version.endsWith('SNAPSHOT')
+                    ? uri('https://s01.oss.sonatype.org/content/repositories/snapshots/')
+                    : uri('https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/')
+                credentials {
+                    username = System.getenv('OSSRH_USERNAME') ?: ''
+                    password = System.getenv('OSSRH_PASSWORD') ?: ''
+                }
+            }
+        }
+    }
+
+    signing {
+        def signingKey = System.getenv('SIGNING_KEY')
+        def signingPassword = System.getenv('SIGNING_PASSWORD')
+        if (signingKey && signingPassword) {
+            useInMemoryPgpKeys(signingKey, signingPassword)
+            sign publishing.publications.mavenJava
         }
     }
 }

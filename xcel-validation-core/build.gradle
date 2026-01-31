@@ -1,1 +1,12 @@
-// Core validation library (no external dependencies yet)
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.32'
+    compileOnly 'com.fasterxml.jackson.core:jackson-databind:2.17.2'
+    annotationProcessor 'org.projectlombok:lombok:1.18.32'
+
+    testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.17.2'
+    testCompileOnly 'org.projectlombok:lombok:1.18.32'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.32'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+}
+
+description = 'Core spreadsheet validation engine'

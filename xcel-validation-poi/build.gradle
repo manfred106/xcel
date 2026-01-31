@@ -1,3 +1,29 @@
 dependencies {
     implementation project(':xcel-validation-core')
+    compileOnly 'org.apache.poi:poi:[4.0,6.0)'
+    compileOnly 'org.apache.poi:poi-ooxml:[4.0,6.0)'
+
+    testImplementation 'org.apache.poi:poi:5.5.1'
+    testImplementation 'org.apache.poi:poi-ooxml:5.5.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+}
+
+description = 'Apache POI adapter for xcel validation'
+
+configurations {
+    poi4TestRuntimeClasspath {
+        extendsFrom testRuntimeClasspath
+        resolutionStrategy {
+            force 'org.apache.poi:poi:4.1.2'
+            force 'org.apache.poi:poi-ooxml:4.1.2'
+        }
+    }
+}
+
+tasks.register('poi4Test', Test) {
+    description = 'Runs tests with Apache POI 4.x'
+    group = 'verification'
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = configurations.poi4TestRuntimeClasspath + sourceSets.test.output
+    shouldRunAfter tasks.test
 }
