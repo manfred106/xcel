@@ -13,7 +13,10 @@ Each field maps to a header and a list of validators.
 ```json
 {
   "fields": [
-    { "fieldName": "Email", "required": true }
+    {
+      "fieldName": "Email",
+      "required": true
+    }
   ]
 }
 ```
@@ -22,7 +25,10 @@ Each field maps to a header and a list of validators.
 ```json
 {
   "fields": [
-    { "fieldName": "Count", "dataType": "Integer" }
+    {
+      "fieldName": "Count",
+      "dataType": "Integer"
+    }
   ]
 }
 ```
@@ -31,7 +37,17 @@ Each field maps to a header and a list of validators.
 ```json
 {
   "fields": [
-    { "fieldName": "Code", "validators": [ { "type": "regex", "options": { "pattern": "^[A-Z]{3}$" } } ] }
+    {
+      "fieldName": "Code",
+      "validators": [
+        {
+          "type": "regex",
+          "options": {
+            "pattern": "^[A-Z]{3}$"
+          }
+        }
+      ]
+    }
   ]
 }
 ```
@@ -40,7 +56,18 @@ Each field maps to a header and a list of validators.
 ```json
 {
   "fields": [
-    { "fieldName": "Age", "validators": [ { "type": "range", "options": { "min": 10, "max": 150 } } ] }
+    {
+      "fieldName": "Age",
+      "validators": [
+        {
+          "type": "range",
+          "options": {
+            "min": 10,
+            "max": 150
+          }
+        }
+      ]
+    }
   ]
 }
 ```
@@ -49,7 +76,18 @@ Each field maps to a header and a list of validators.
 ```json
 {
   "fields": [
-    { "fieldName": "Name", "validators": [ { "type": "length", "options": { "min": 3, "max": 50 } } ] }
+    {
+      "fieldName": "Name",
+      "validators": [
+        {
+          "type": "length",
+          "options": {
+            "min": 3,
+            "max": 50
+          }
+        }
+      ]
+    }
   ]
 }
 ```
@@ -58,7 +96,17 @@ Each field maps to a header and a list of validators.
 ```json
 {
   "fields": [
-    { "fieldName": "Date", "validators": [ { "type": "dateTime", "options": { "format": "yyyy-MM-dd" } } ] }
+    {
+      "fieldName": "Date",
+      "validators": [
+        {
+          "type": "dateTime",
+          "options": {
+            "format": "yyyy-MM-dd"
+          }
+        }
+      ]
+    }
   ]
 }
 ```
@@ -67,7 +115,20 @@ Each field maps to a header and a list of validators.
 ```json
 {
   "fields": [
-    { "fieldName": "Status", "validators": [ { "type": "set", "options": { "values": ["NEW", "DONE"] } } ] }
+    {
+      "fieldName": "Status",
+      "validators": [
+        {
+          "type": "set",
+          "options": {
+            "values": [
+              "NEW",
+              "DONE"
+            ]
+          }
+        }
+      ]
+    }
   ]
 }
 ```
@@ -76,7 +137,14 @@ Each field maps to a header and a list of validators.
 ```json
 {
   "fields": [
-    { "fieldName": "Email", "validators": [ { "type": "unique" } ] }
+    {
+      "fieldName": "Email",
+      "validators": [
+        {
+          "type": "unique"
+        }
+      ]
+    }
   ]
 }
 ```
